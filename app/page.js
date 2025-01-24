@@ -1,5 +1,3 @@
-import Weather from "../components/Weather";
-
 const Home = () => {
   return (
     <div className="container mx-auto px-4">
@@ -10,7 +8,7 @@ const Home = () => {
         <p className="text-xl text-gray-600 mb-8">
           Check the weather in your city
         </p>
-        <Weather />
+
       </div>
     </div>
   );

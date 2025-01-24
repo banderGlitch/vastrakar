@@ -1,23 +1,18 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
-import Navbar from "../components/Navbar";
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata = {
-  title: "Weather App",
-  description: "A simple weather application",
-};
+import Navbar from "./components/sections/Navbar";
+import Footer from "./components/sections/Footer";
 
 
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-       <body className={`${inter.className} bg-gray-50`}>
+      <body>
         <Navbar />
-        <div className="pt-24 min-h-screen">
+        <main className="h-screen"> {/* Add padding top to account for fixed navbar */}
           {children}
-        </div>
+        </main>
+        <Footer />
       </body>
     </html>
   );
