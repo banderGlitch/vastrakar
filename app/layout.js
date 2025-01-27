@@ -1,19 +1,26 @@
-import "./globals.css";
-import Navbar from "./components/sections/Navbar";
-import Footer from "./components/sections/Footer";
+import Navbar from './components/sections/Navbar'
+import Footer from './components/sections/Footer'
+import MainNav from './components/sections/MainNav'
+import PageTransition from './components/ui/PageTransition'
+import './globals.css'
 
-
+export const metadata = {
+  title: 'Vastrakari',
+  description: 'Your fashion destination'
+}
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="flex flex-col min-h-screen">
         <Navbar />
-        <main className="h-screen"> {/* Add padding top to account for fixed navbar */}
-          {children}
-        </main>
+        <PageTransition>
+          <main className="flex-grow">
+            {children}
+          </main>
+        </PageTransition>
         <Footer />
       </body>
     </html>
-  );
+  )
 }

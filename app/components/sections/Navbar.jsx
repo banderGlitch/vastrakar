@@ -1,65 +1,122 @@
 "use client";
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const pathname = usePathname();
+
+  const mainMenuItems = [
+    { title: 'NEW IN', href: '/new-in' },
+    { title: 'BESTSELLER', href: '/bestseller' },
+    { title: 'SHOP WOMEN', href: '/shop-women' },
+    { title: 'SHOP MEN', href: '/shop-men' },
+    { title: 'SHOP BY CRAFTS', href: '/crafts' },
+    { title: 'INFLUENCERS EDIT', href: '/influencers' },
+    { title: 'SPECIAL PRICES', href: '/special-prices', highlight: true },
+    { title: 'CELEBRITIES', href: '/celebrities' },
+    { title: 'OUR STORY', href: '/our-story' },
+  ];
+
+  const handleNavigation = useCallback(() => {
+    if (isMenuOpen) setIsMenuOpen(false);
+  }, [isMenuOpen]);
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md fixed w-full z-50 top-0 left-0 border-b border-gray-200">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/images/vastrakariLogoCroped.png"
-            alt="Vastrakari Logo"
-            width={140}
-            height={35}
-            className="rounded-lg"
-            priority
-          />
-        </Link>
+    <header className="fixed top-0 left-0 right-0 z-[100] bg-white">
+      {/* Top Navbar */}
+      <nav className="border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link href="/" onClick={handleNavigation}>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center"
+              >
+                <Image
+                  src="/images/vastrakariLogoCroped.png"
+                  alt="Vastrakari Logo"
+                  width={140}
+                  height={35}
+                  className="rounded-lg"
+                  priority
+                />
+              </motion.div>
+            </Link>
 
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-        >
-          {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+            {/* Mobile menu button */}
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </motion.button>
+          </div>
+        </div>
+      </nav>
 
-        {/* Desktop Navigation */}
-        <div className={`${isMenuOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`}>
-          <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent">
-            <li>
-              <Link 
-                href="/" 
-                className="block py-2 pl-3 pr-4 text-white bg-[#ec8387] rounded md:bg-transparent md:text-[#ec8387] md:p-0"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/about" 
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#ec8387] md:p-0"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/contact" 
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#ec8387] md:p-0"
-              >
-                Contact
-              </Link>
-            </li>
+      {/* Main Navigation Menu */}
+      <nav className="border-b border-gray-200 hidden md:block">
+        <div className="max-w-screen-2xl mx-auto">
+          <ul className="flex items-center justify-center space-x-8 py-4 px-4 overflow-x-auto">
+            {mainMenuItems.map((item) => (
+              <li key={item.href} className="relative">
+                <Link 
+                  href={item.href}
+                  className={`text-sm whitespace-nowrap ${
+                    item.highlight ? 'text-[#ec8387]' : 'text-gray-800'
+                  } hover:text-[#ec8387] transition-colors duration-200`}
+                  onMouseEnter={() => setHoveredItem(item.title)}
+                  onMouseLeave={() => setHoveredItem(null)}
+                >
+                  {item.title}
+                  {hoveredItem === item.title && (
+                    <motion.div
+                      layoutId="underline"
+                      className="absolute left-0 right-0 h-0.5 bg-[#ec8387]"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    />
+                  )}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      <div 
+        className={`${
+          isMenuOpen ? 'block' : 'hidden'
+        } md:hidden fixed inset-0 top-16 bg-white z-50 overflow-y-auto`}
+      >
+        <ul className="flex flex-col p-4">
+          {mainMenuItems.map((item) => (
+            <li key={item.href} className="border-b border-gray-100 last:border-none">
+              <Link
+                href={item.href}
+                onClick={handleNavigation}
+                className={`block py-3 px-4 ${
+                  item.highlight ? 'text-[#ec8387]' : 'text-gray-800'
+                } hover:bg-gray-50`}
+              >
+                {item.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
-    </nav>
+    </header>
   );
 }
