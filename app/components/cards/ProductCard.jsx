@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
 
   return (
     <motion.div 
-      className="h-full flex flex-col bg-white p-4 rounded-lg shadow-sm"
+      className="h-full flex flex-col bg-black p-4 rounded-lg shadow-sm border border-white/10"
       whileHover={{ y: -5 }}
       transition={{ duration: 0.2 }}
     >
@@ -30,19 +30,19 @@ export default function ProductCard({ product }) {
         </div>
         
         {/* Rating - Right Top */}
-        <div className="absolute top-3 right-12 bg-white px-2 py-1 rounded-sm flex items-center gap-1">
+        <div className="absolute top-3 right-12 bg-black/90 px-2 py-1 rounded-sm flex items-center gap-1">
           <span className="text-[#f9ca86] text-sm">★</span>
-          <span className="text-xs font-medium">{product.rating}</span>
+          <span className="text-xs font-medium text-white">{product.rating}</span>
         </div>
         
         {/* Wishlist Button - Right Top Corner */}
         <button
           onClick={() => setIsWishlisted(!isWishlisted)}
-          className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-sm bg-white hover:bg-gray-50"
+          className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-sm bg-black/90 hover:bg-black/80"
         >
           <Heart
             className={`w-4 h-4 ${
-              isWishlisted ? 'fill-[#ec8387] text-[#ec8387]' : 'text-gray-600'
+              isWishlisted ? 'fill-[#ec8387] text-[#ec8387]' : 'text-[#f9ca86]/70'
             }`}
           />
         </button>
@@ -51,16 +51,16 @@ export default function ProductCard({ product }) {
       {/* Product Info */}
       <div className="flex-grow flex flex-col">
         {/* Title */}
-        <h3 className="font-medium text-[#000000] mb-2 line-clamp-2 min-h-[40px]">
+        <h3 className="font-medium text-[#f9ca86] mb-2 line-clamp-2 min-h-[40px]">
           {product.name}
         </h3>
         
         {/* Price Section */}
         <div className="flex items-center gap-2 mb-4">
-          <span className="text-lg font-semibold text-[#000000]">₹{product.price}</span>
+          <span className="text-lg font-semibold text-[#f9ca86]">₹{product.price}</span>
           {product.originalPrice && (
             <>
-              <span className="text-sm text-gray-500 line-through">
+              <span className="text-sm text-[#f9ca86]/50 line-through">
                 M.R.P. ₹{product.originalPrice}
               </span>
               <span className="text-sm text-[#ec8387]">
@@ -78,8 +78,8 @@ export default function ProductCard({ product }) {
               onClick={() => setSelectedSize(size)}
               className={`w-9 h-9 text-xs font-medium border rounded-sm transition-colors
                 ${size === selectedSize 
-                  ? 'border-[#ec8387] text-[#ec8387] bg-[#ec8387]/5' 
-                  : 'border-gray-200 text-gray-500 hover:border-[#ec8387]/30'
+                  ? 'border-[#ec8387] text-[#ec8387] bg-[#ec8387]/10' 
+                  : 'border-white/20 text-white/50 hover:border-[#ec8387]/30'
                 }`}
             >
               {size}
@@ -88,7 +88,7 @@ export default function ProductCard({ product }) {
         </div>
 
         {/* Add to Cart Button */}
-        <button className="w-full py-3 mt-auto text-white text-sm font-medium bg-[#ec8387] rounded-sm hover:bg-[#ec8387]/90 transition-colors">
+        <button className="w-full py-3 mt-auto text-[#f9ca86] text-sm font-medium bg-[#ec8387] rounded-sm hover:bg-[#ec8387]/90 transition-colors">
           ADD TO CART
         </button>
       </div>

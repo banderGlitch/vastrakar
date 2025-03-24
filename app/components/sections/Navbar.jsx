@@ -17,10 +17,10 @@ export default function Navbar() {
     { title: 'SHOP WOMEN', href: '/shop-women' },
     { title: 'SHOP MEN', href: '/shop-men' },
     { title: 'SHOP BY CRAFTS', href: '/crafts' },
-    { title: 'INFLUENCERS EDIT', href: '/influencers' },
-    { title: 'SPECIAL PRICES', href: '/special-prices', highlight: true },
-    { title: 'CELEBRITIES', href: '/celebrities' },
-    { title: 'OUR STORY', href: '/our-story' },
+    // { title: 'INFLUENCERS EDIT', href: '/influencers' },
+    // { title: 'SPECIAL PRICES', href: '/special-prices', highlight: true },
+    // { title: 'CELEBRITIES', href: '/celebrities' },
+    // { title: 'OUR STORY', href: '/our-story' },
   ];
 
   const handleNavigation = useCallback(() => {
@@ -28,9 +28,9 @@ export default function Navbar() {
   }, [isMenuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] bg-white">
+    <header className="fixed top-0 left-0 right-0 z-[100] bg-black">
       {/* Top Navbar */}
-      <nav className="border-b border-gray-200">
+      <nav className="border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -44,8 +44,8 @@ export default function Navbar() {
                   src="/images/vastrakariLogoCroped.png"
                   alt="Vastrakari Logo"
                   width={140}
-                  height={35}
-                  className="rounded-lg"
+                  height={30}
+                  className="rounded-lg mt-7"
                   priority
                 />
               </motion.div>
@@ -55,7 +55,7 @@ export default function Navbar() {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20 text-[#f9ca86]"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -65,16 +65,14 @@ export default function Navbar() {
       </nav>
 
       {/* Main Navigation Menu */}
-      <nav className="border-b border-gray-200 hidden md:block">
+      <nav className="border-b border-white/10 hidden md:block">
         <div className="max-w-screen-2xl mx-auto">
           <ul className="flex items-center justify-center space-x-8 py-4 px-4 overflow-x-auto">
             {mainMenuItems.map((item) => (
               <li key={item.href} className="relative">
                 <Link 
                   href={item.href}
-                  className={`text-sm whitespace-nowrap ${
-                    item.highlight ? 'text-[#ec8387]' : 'text-gray-800'
-                  } hover:text-[#ec8387] transition-colors duration-200`}
+                  className={`text-sm whitespace-nowrap text-[#f9ca86] hover:text-[#ec8387] transition-colors duration-200`}
                   onMouseEnter={() => setHoveredItem(item.title)}
                   onMouseLeave={() => setHoveredItem(null)}
                 >
@@ -99,17 +97,15 @@ export default function Navbar() {
       <div 
         className={`${
           isMenuOpen ? 'block' : 'hidden'
-        } md:hidden fixed inset-0 top-16 bg-white z-50 overflow-y-auto`}
+        } md:hidden fixed inset-0 top-16 bg-black z-50 overflow-y-auto`}
       >
         <ul className="flex flex-col p-4">
           {mainMenuItems.map((item) => (
-            <li key={item.href} className="border-b border-gray-100 last:border-none">
+            <li key={item.href} className="border-b border-white/10 last:border-none">
               <Link
                 href={item.href}
                 onClick={handleNavigation}
-                className={`block py-3 px-4 ${
-                  item.highlight ? 'text-[#ec8387]' : 'text-gray-800'
-                } hover:bg-gray-50`}
+                className="block py-3 px-4 text-[#f9ca86] hover:text-[#ec8387] hover:bg-white/5 transition-colors duration-200"
               >
                 {item.title}
               </Link>

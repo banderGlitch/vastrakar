@@ -3,9 +3,9 @@ import ProductCard from '../cards/ProductCard';
 
 export default function BestSellers({ products }) {
     return (
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-black">
         <div className="container mx-auto px-4">
-          <h2 className="text-center font-playfair text-2xl font-bold mb-12">
+          <h2 className="text-center font-playfair text-2xl font-bold mb-12 text-[#f9ca86]">
             BESTSELLERS
           </h2>
           

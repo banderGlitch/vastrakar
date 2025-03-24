@@ -19,16 +19,14 @@ export default function MainNav() {
   ];
 
   return (
-    <nav className="w-full bg-white border-b">
+    <nav className="w-full bg-black border-b border-white/10">
       <div className="max-w-screen-2xl mx-auto">
         <ul className="flex items-center justify-center space-x-8 py-4 px-4 overflow-x-auto">
           {menuItems.map((item) => (
             <li key={item.href} className="relative">
               <Link 
                 href={item.href}
-                className={`text-sm whitespace-nowrap ${
-                  item.highlight ? 'text-[#ec8387]' : 'text-gray-800'
-                } hover:text-[#ec8387] transition-colors duration-200`}
+                className="text-sm whitespace-nowrap text-[#f9ca86] hover:text-[#ec8387] transition-colors duration-200"
                 onMouseEnter={() => setHoveredItem(item.title)}
                 onMouseLeave={() => setHoveredItem(null)}
               >

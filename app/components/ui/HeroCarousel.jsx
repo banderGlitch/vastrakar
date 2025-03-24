@@ -71,23 +71,23 @@ export default function HeroCarousel() {
           
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <motion.h2
+              {/* <motion.h2
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 className="text-6xl font-playfair text-navy-blue mb-4"
               >
                 {carouselItems[currentSlide].title}
-              </motion.h2>
-              <motion.p
+              </motion.h2> */}
+              {/* <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
                 className="text-2xl text-orange-500 mb-8"
               >
                 {carouselItems[currentSlide].subtitle}
-              </motion.p>
+              </motion.p> */}
               
-              <div className="flex justify-center gap-4">
+              {/* <div className="flex justify-center gap-4">
                 {carouselItems[currentSlide].offers.map((offer, index) => (
                   <motion.div
                     key={offer.code}
@@ -110,7 +110,7 @@ export default function HeroCarousel() {
                          hover:bg-navy-blue/90 transition-colors duration-200"
               >
                 Shop Now
-              </motion.button>
+              </motion.button> */}
             </div>
           </div>
         </motion.div>

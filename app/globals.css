@@ -9,44 +9,39 @@
   --secondary-color: #f9ca86;
   --accent-color: #000000;
   
-  --border: 236,96,135;     /* #EC6087 */
-  --background: 255,255,255; /* White */
-  --foreground: 0,0,0;      /* Black */
-  --primary: 236,131,135;   /* #EC8387 - Your coral color */
+  --border: 236,131,135;     /* #EC8387 */
+  --background: 0,0,0;      /* Black */
+  --foreground: 255,255,255; /* White */
+  --primary: 236,131,135;   /* #EC8387 */
+  --secondary: 249,202,134; /* #F9CA86 */
+  --accent: 0,0,0;         /* #000000 */
   --muted: 249,250,251;     /* Light gray */
 }
-.text-navy-blue {
-    color: #1a237e;
-  }
-  
-  .bg-navy-blue {
-    background-color: #1a237e;
-  }
-  
-  /* Custom scrollbar for the navigation */
-  .overflow-x-auto {
-    scrollbar-width: thin;
-    scrollbar-color: #ec8387 #f1f1f1;
-  }
-  
-  .overflow-x-auto::-webkit-scrollbar {
-    height: 4px;
-  }
-  
-  .overflow-x-auto::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  .overflow-x-auto::-webkit-scrollbar-thumb {
-    background: #ec8387;
-    border-radius: 4px;
-  }
+
+/* Custom scrollbar for the navigation */
+.overflow-x-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #ec8387 #000000;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  height: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: #ec8387;
+  border-radius: 4px;
+}
 
 /* Typography System */
 @layer base {
   /* Heading Styles */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-['Playfair_Display'] font-bold leading-tight;
+    @apply font-['Playfair_Display'] font-bold leading-tight text-[#f9ca86];
   }
 
   h1 {
@@ -67,12 +62,8 @@
 
   /* Body Text */
   body {
-    @apply font-['Poppins'] text-base text-gray-800 leading-relaxed;
-    background: linear-gradient(
-      to bottom right,
-      rgba(236, 131, 135, 0.05),
-      rgba(249, 202, 134, 0.05)
-    );
+    @apply font-['Poppins'] text-base text-[#f9ca86]/90 leading-relaxed;
+    background: #000000;
   }
 
   p {
@@ -96,50 +87,52 @@
   }
 
   .nav-item-default {
-    @apply text-gray-800 hover:text-[#ec8387];
+    @apply text-[#f9ca86] hover:text-[#ec8387];
   }
+
   .btn-primary {
-    @apply font-['Poppins'] font-medium bg-[#ec8387] text-white px-6 py-2 
+    @apply font-['Poppins'] font-medium bg-[#ec8387] text-[#f9ca86] px-6 py-2 
            rounded-full hover:bg-[#ec8387]/90 transition-all duration-300;
   }
 
   .btn-secondary {
-    @apply font-['Poppins'] font-medium bg-[#f9ca86] text-white px-6 py-2 
+    @apply font-['Poppins'] font-medium bg-[#f9ca86] text-[#000000] px-6 py-2 
            rounded-full hover:bg-[#f9ca86]/90 transition-all duration-300;
   }
 
   /* Navigation Styles */
   .nav-link {
-    @apply font-['Poppins'] font-medium text-gray-700 hover:text-[#ec8387] 
+    @apply font-['Poppins'] font-medium text-[#f9ca86] hover:text-[#ec8387] 
            transition-colors duration-200;
   }
 
   /* Card Styles */
   .card-title {
-    @apply font-['Playfair_Display'] font-bold text-xl mb-2;
+    @apply font-['Playfair_Display'] font-bold text-xl mb-2 text-[#f9ca86];
   }
 
   .card-text {
-    @apply font-['Poppins'] text-gray-600;
+    @apply font-['Poppins'] text-[#f9ca86]/80;
   }
+
   .product-badge {
-    @apply absolute top-2 left-2 bg-[#5BA69B] text-white px-3 py-1 text-sm rounded;
+    @apply absolute top-2 left-2 bg-[#ec8387] text-[#f9ca86] px-3 py-1 text-sm rounded;
   }
 
   .product-rating {
-    @apply absolute top-2 right-2 bg-white/90 px-2 py-1 rounded flex items-center gap-1;
+    @apply absolute top-2 right-2 bg-black/90 px-2 py-1 rounded flex items-center gap-1;
   }
 
   .product-price {
-    @apply text-lg font-bold;
+    @apply text-lg font-bold text-[#f9ca86];
   }
 
   .product-original-price {
-    @apply text-sm text-gray-500 line-through;
+    @apply text-sm text-[#f9ca86]/50 line-through;
   }
 
   .product-discount {
-    @apply text-sm text-[#5BA69B];
+    @apply text-sm text-[#ec8387];
   }
 
   .size-option {
@@ -147,22 +140,22 @@
   }
 
   .size-option-selected {
-    @apply border-[#5BA69B] text-[#5BA69B];
+    @apply border-[#ec8387] text-[#ec8387];
   }
 
   .size-option-default {
-    @apply border-gray-200 text-gray-500;
+    @apply border-[#f9ca86]/20 text-[#f9ca86]/50;
   }
 
   .add-to-cart-btn {
-    @apply w-full py-2 mt-4 text-white bg-[#5BA69B] rounded hover:bg-[#5BA69B]/90 transition-colors;
+    @apply w-full py-2 mt-4 text-[#f9ca86] bg-[#ec8387] rounded hover:bg-[#ec8387]/90 transition-colors;
   }
 }
 
 /* Utility Classes */
 @layer utilities {
   .heading-elegant {
-    @apply font-['Playfair_Display'] font-bold;
+    @apply font-['Playfair_Display'] font-bold text-[#f9ca86];
   }
 
   .heading-large {
@@ -170,15 +163,16 @@
   }
 
   .text-body-large {
-    @apply text-lg leading-relaxed;
+    @apply text-lg leading-relaxed text-[#f9ca86]/90;
   }
 
   .text-body-small {
-    @apply text-sm leading-relaxed;
+    @apply text-sm leading-relaxed text-[#f9ca86]/80;
   }
 }
 
 /* Existing Styles */
 html {
   scroll-behavior: smooth;
+  background-color: #000000;
 }
