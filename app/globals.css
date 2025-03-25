@@ -10,7 +10,9 @@
   --accent-color: #000000;
   
   --border: 236,131,135;     /* #EC8387 */
-  --background: 0,0,0;      /* Black */
+
+  
+  --background: #000000;;      /* Black */
   --foreground: 255,255,255; /* White */
   --primary: 236,131,135;   /* #EC8387 */
   --secondary: 249,202,134; /* #F9CA86 */

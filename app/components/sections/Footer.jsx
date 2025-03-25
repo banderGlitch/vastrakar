@@ -9,9 +9,6 @@ export default function Footer() {
             <div className="mb-4 sm:mb-0">
               <Image src="/images/vastrakariLogoCroped.png" alt="Vastrakari Logo"   width={140}
                   height={30}/>
-              {/* <span className="text-2xl font-semibold text-[#ec8387]">
-                VASTRAKARI
-              </span> */}
             </div>
   
             {/* Footer Links */}
