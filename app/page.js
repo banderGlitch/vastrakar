@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import HeroCarousel from './components/ui/HeroCarousel';
 import BestSeller from './components/sections/BestSeller';
 import InfiniteScroll from 'react-infinite-scroll-component'
+import Loader from './components/ui/Loader';
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -12,32 +13,24 @@ export default function Home() {
   const [cursor, setCursor] = useState(null);
   const [hasNextPage, setHasNextPage] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     try {
-  //       const res = await fetch('/api/products', { cache: 'no-store' });
-  //       const { products } = await res.json();
-  //       console.log('Products fetched------------>:', products);
-  //       setData(products);
-  //     } catch (err) {
-  //       console.error('Error fetching products:', err);
-  //       setError(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchProducts();
-  // }, []);
-
   const fetchProducts = async () => {
     const res = await fetch(`/api/products${cursor ? `?cursor=${cursor}` : ''}`, { cache: 'no-store' });
-    const json = await res.json();  
-    console.log('json------------>:', json);  
-    setProducts(prev => [...prev, ...json.products]);
+    const json = await res.json();
+    console.log('json------------>:', json);
+
+    setProducts((prev) => {
+      const all = [...prev, ...json.products];
+      const seen = new Set();
+      return all.filter((p) => {
+        if (seen.has(p.id)) return false;
+        seen.add(p.id);
+        return true;
+      });
+    });
+
     setCursor(json.endCursor);
     setHasNextPage(json.hasNextPage);
-  }
+  };
 
   useEffect(() => {
     fetchProducts();
@@ -48,17 +41,21 @@ export default function Home() {
   }
 
   return (
-    <main>  
-          <HeroCarousel />
-          <InfiniteScroll
-            dataLength={products.length}
-            next={fetchMoreProducts}
-            hasMore={hasNextPage}
-            loader={<h4>Loading...</h4>}
-            endMessage={<p>No more products to show.</p>}
-          >
-          <BestSeller products={products} />
-          </InfiniteScroll>
-      </main>
+    <main>
+      <HeroCarousel />
+      <InfiniteScroll
+        dataLength={products.length}
+        next={fetchMoreProducts}
+        hasMore={hasNextPage}
+        loader={
+          <div className="w-full py-10 flex justify-center items-center overflow-hidden">
+            <Loader />
+          </div>
+
+        }
+      >
+        <BestSeller products={products} />
+      </InfiniteScroll>
+    </main>
   );
 }

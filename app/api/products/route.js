@@ -3,8 +3,6 @@ import axios from "axios";
 const SHOPIFY_DOMAIN = process.env.SHOPIFY_DOMAIN;
 const ACCESS_TOKEN = process.env.SHOPIFY_ACCESS_TOKEN;
 
-console.log("SHOPIFY_DOMAIN", SHOPIFY_DOMAIN);
-console.log("ACCESS_TOKEN", ACCESS_TOKEN);
 
 // Process the request
 export async function GET(req) {
@@ -13,7 +11,7 @@ export async function GET(req) {
 
   const query = `
       {
-        products(first: 20${cursor ? `, after: "${cursor}"` : ""}) {
+        products(first: 2${cursor ? `, after: "${cursor}"` : ""}) {
           edges {
             cursor
             node {
